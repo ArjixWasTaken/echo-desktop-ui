@@ -17,11 +17,13 @@
         "@tanstack/router-plugin": "^1.109.2",
         "@tanstack/solid-router": "^1.110.0",
         "@tanstack/solid-router-devtools": "^1.109.2",
+        "mdui": "^2.1.4",
         "solid-js": "^1.9.4",
         "tailwindcss": "^4.0.6"
     },
     "devDependencies": {
         "@biomejs/biome": "1.9.4",
+        "@suid/icons-material": "^0.8.1",
         "typescript": "^5.7.2",
         "vite": "^6.0.11",
         "vite-plugin-solid": "^2.11.2"

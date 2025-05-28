@@ -1,3 +1,6 @@
+import "mdui/mdui.css";
+import "mdui";
+
 import { render } from "solid-js/web";
 import { RouterProvider, createRouter } from "@tanstack/solid-router";
 
