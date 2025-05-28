@@ -1,17 +1,67 @@
-import { createRootRoute, Link, Outlet } from "@tanstack/solid-router";
-import { TanStackRouterDevtools } from "@tanstack/solid-router-devtools";
+import { createRootRoute, Outlet, useNavigate } from "@tanstack/solid-router";
+
+import Home from "@suid/icons-material/HomeOutlined";
+import HomeActive from "@suid/icons-material/Home";
+
+import Favorite from "@suid/icons-material/FavoriteBorder";
+import FavoriteActive from "@suid/icons-material/Favorite";
+
+import LibraryMusic from "@suid/icons-material/LibraryMusicOutlined";
+import LibraryMusicActive from "@suid/icons-material/LibraryMusic";
+
+import Download from "@suid/icons-material/Download";
+
+import Menu from "@suid/icons-material/Menu";
+import Settings from "@suid/icons-material/Settings";
 
 export const Route = createRootRoute({
-	component: () => (
-		<>
-			<div class="p-2 flex gap-2">
-				<Link to="/" class="[&.active]:font-bold">
-					Home
-				</Link>
+	component: () => {
+		const navigate = useNavigate();
+		return (
+			<div class="relative h-screen bg-gray-200">
+				<mdui-navigation-rail contained divider alignment="center">
+					<mdui-button-icon slot="top">
+						<Menu />
+					</mdui-button-icon>
+
+					<mdui-button-icon
+						slot="bottom"
+						onClick={() => navigate({ to: "/settings" })}
+					>
+						<Settings />
+					</mdui-button-icon>
+
+					<mdui-navigation-rail-item onClick={() => navigate({ to: "/" })}>
+						<Home slot="icon" />
+						<HomeActive slot="active-icon" />
+						Home
+					</mdui-navigation-rail-item>
+					<mdui-navigation-rail-item
+						onClick={() => navigate({ to: "/favourites" })}
+					>
+						<Favorite slot="icon" />
+						<FavoriteActive slot="active-icon" />
+						Favorites
+					</mdui-navigation-rail-item>
+					<mdui-navigation-rail-item
+						onClick={() => navigate({ to: "/library" })}
+					>
+						<LibraryMusic slot="icon" />
+						<LibraryMusicActive slot="active-icon" />
+						Library
+					</mdui-navigation-rail-item>
+					<mdui-navigation-rail-item
+						onClick={() => navigate({ to: "/downloads" })}
+					>
+						<Download slot="icon" />
+						Downloads
+					</mdui-navigation-rail-item>
+				</mdui-navigation-rail>
+
+				<div class="h-screen overflow-auto bg-white">
+					<Outlet />
+				</div>
 			</div>
-			<hr />
-			<Outlet />
-			<TanStackRouterDevtools />
-		</>
-	),
+		);
+	},
 });

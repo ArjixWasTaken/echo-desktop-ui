@@ -11,9 +11,37 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
+import { Route as SettingsImport } from './routes/settings'
+import { Route as LibraryImport } from './routes/library'
+import { Route as FavouritesImport } from './routes/favourites'
+import { Route as DownloadsImport } from './routes/downloads'
 import { Route as IndexImport } from './routes/index'
 
 // Create/Update Routes
+
+const SettingsRoute = SettingsImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const LibraryRoute = LibraryImport.update({
+  id: '/library',
+  path: '/library',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const FavouritesRoute = FavouritesImport.update({
+  id: '/favourites',
+  path: '/favourites',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const DownloadsRoute = DownloadsImport.update({
+  id: '/downloads',
+  path: '/downloads',
+  getParentRoute: () => rootRoute,
+} as any)
 
 const IndexRoute = IndexImport.update({
   id: '/',
@@ -32,6 +60,34 @@ declare module '@tanstack/solid-router' {
       preLoaderRoute: typeof IndexImport
       parentRoute: typeof rootRoute
     }
+    '/downloads': {
+      id: '/downloads'
+      path: '/downloads'
+      fullPath: '/downloads'
+      preLoaderRoute: typeof DownloadsImport
+      parentRoute: typeof rootRoute
+    }
+    '/favourites': {
+      id: '/favourites'
+      path: '/favourites'
+      fullPath: '/favourites'
+      preLoaderRoute: typeof FavouritesImport
+      parentRoute: typeof rootRoute
+    }
+    '/library': {
+      id: '/library'
+      path: '/library'
+      fullPath: '/library'
+      preLoaderRoute: typeof LibraryImport
+      parentRoute: typeof rootRoute
+    }
+    '/settings': {
+      id: '/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof SettingsImport
+      parentRoute: typeof rootRoute
+    }
   }
 }
 
@@ -39,32 +95,52 @@ declare module '@tanstack/solid-router' {
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/downloads': typeof DownloadsRoute
+  '/favourites': typeof FavouritesRoute
+  '/library': typeof LibraryRoute
+  '/settings': typeof SettingsRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/downloads': typeof DownloadsRoute
+  '/favourites': typeof FavouritesRoute
+  '/library': typeof LibraryRoute
+  '/settings': typeof SettingsRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
+  '/downloads': typeof DownloadsRoute
+  '/favourites': typeof FavouritesRoute
+  '/library': typeof LibraryRoute
+  '/settings': typeof SettingsRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/downloads' | '/favourites' | '/library' | '/settings'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/downloads' | '/favourites' | '/library' | '/settings'
+  id: '__root__' | '/' | '/downloads' | '/favourites' | '/library' | '/settings'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  DownloadsRoute: typeof DownloadsRoute
+  FavouritesRoute: typeof FavouritesRoute
+  LibraryRoute: typeof LibraryRoute
+  SettingsRoute: typeof SettingsRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  DownloadsRoute: DownloadsRoute,
+  FavouritesRoute: FavouritesRoute,
+  LibraryRoute: LibraryRoute,
+  SettingsRoute: SettingsRoute,
 }
 
 export const routeTree = rootRoute
@@ -77,11 +153,27 @@ export const routeTree = rootRoute
     "__root__": {
       "filePath": "__root.tsx",
       "children": [
-        "/"
+        "/",
+        "/downloads",
+        "/favourites",
+        "/library",
+        "/settings"
       ]
     },
     "/": {
       "filePath": "index.tsx"
+    },
+    "/downloads": {
+      "filePath": "downloads.tsx"
+    },
+    "/favourites": {
+      "filePath": "favourites.tsx"
+    },
+    "/library": {
+      "filePath": "library.tsx"
+    },
+    "/settings": {
+      "filePath": "settings.tsx"
     }
   }
 }

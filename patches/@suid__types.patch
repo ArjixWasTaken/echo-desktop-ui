@@ -1,0 +1,20 @@
+diff --git a/.vscode/settings.json b/.vscode/settings.json
+new file mode 100644
+index 0000000000000000000000000000000000000000..9e26dfeeb6e641a33dae4961196235bdb965b21b
+--- /dev/null
++++ b/.vscode/settings.json
+@@ -0,0 +1 @@
++{}
+\ No newline at end of file
+diff --git a/overridable.d.ts b/overridable.d.ts
+index c76704c7e3a4745cf1ba4ac6063b4badba19b3d0..513f7a46ed19ddc22abe351f8ab2ad3af0a0ba55 100644
+--- a/overridable.d.ts
++++ b/overridable.d.ts
+@@ -59,6 +59,7 @@ export type BaseProps<M extends SuidComponentType> = M["props"] & CommonProps;
+ export interface CommonProps {
+     class?: string;
+     as?: ElementType;
++    slot?: string;
+ }
+ export interface OverridableTypeMap extends SuidComponentType {
+     defaultComponent: ElementType;

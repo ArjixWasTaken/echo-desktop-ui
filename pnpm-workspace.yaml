@@ -1,2 +1,6 @@
 onlyBuiltDependencies:
   - '@biomejs/biome'
+  - '@tailwindcss/oxide'
+  - esbuild
+patchedDependencies:
+  '@suid/types': patches/@suid__types.patch
