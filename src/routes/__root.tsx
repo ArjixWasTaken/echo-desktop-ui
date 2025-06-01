@@ -1,3 +1,4 @@
+import { createMemo } from "solid-js";
 import {
 	createRootRoute,
 	Outlet,
@@ -18,7 +19,7 @@ import Download from "@suid/icons-material/Download";
 
 import Menu from "@suid/icons-material/Menu";
 import Settings from "@suid/icons-material/Settings";
-import { createMemo } from "solid-js";
+import { PlayerLayout } from "../components/PlayerLayout";
 
 export const Route = createRootRoute({
 	component: () => {
@@ -30,7 +31,7 @@ export const Route = createRootRoute({
 		});
 
 		return (
-			<div class="relative h-screen bg-gray-200">
+			<div class="h-screen bg-gray-200">
 				<mdui-navigation-rail
 					contained
 					divider
@@ -81,9 +82,9 @@ export const Route = createRootRoute({
 					</mdui-navigation-rail-item>
 				</mdui-navigation-rail>
 
-				<div class="h-screen overflow-auto bg-white">
+				<PlayerLayout>
 					<Outlet />
-				</div>
+				</PlayerLayout>
 			</div>
 		);
 	},
