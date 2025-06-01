@@ -1,4 +1,9 @@
-import { createRootRoute, Outlet, useNavigate } from "@tanstack/solid-router";
+import {
+	createRootRoute,
+	Outlet,
+	useNavigate,
+	useLocation,
+} from "@tanstack/solid-router";
 
 import Home from "@suid/icons-material/HomeOutlined";
 import HomeActive from "@suid/icons-material/Home";
@@ -13,13 +18,25 @@ import Download from "@suid/icons-material/Download";
 
 import Menu from "@suid/icons-material/Menu";
 import Settings from "@suid/icons-material/Settings";
+import { createMemo } from "solid-js";
 
 export const Route = createRootRoute({
 	component: () => {
 		const navigate = useNavigate();
+		const location = useLocation();
+		const active = createMemo(() => {
+			const part = location().pathname.split("/")[1];
+			return part || "home";
+		});
+
 		return (
 			<div class="relative h-screen bg-gray-200">
-				<mdui-navigation-rail contained divider alignment="center">
+				<mdui-navigation-rail
+					contained
+					divider
+					alignment="center"
+					value={active()}
+				>
 					<mdui-button-icon slot="top">
 						<Menu />
 					</mdui-button-icon>
@@ -31,12 +48,16 @@ export const Route = createRootRoute({
 						<Settings />
 					</mdui-button-icon>
 
-					<mdui-navigation-rail-item onClick={() => navigate({ to: "/" })}>
+					<mdui-navigation-rail-item
+						value="home"
+						onClick={() => navigate({ to: "/" })}
+					>
 						<Home slot="icon" />
 						<HomeActive slot="active-icon" />
 						Home
 					</mdui-navigation-rail-item>
 					<mdui-navigation-rail-item
+						value="favourites"
 						onClick={() => navigate({ to: "/favourites" })}
 					>
 						<Favorite slot="icon" />
@@ -44,6 +65,7 @@ export const Route = createRootRoute({
 						Favorites
 					</mdui-navigation-rail-item>
 					<mdui-navigation-rail-item
+						value="library"
 						onClick={() => navigate({ to: "/library" })}
 					>
 						<LibraryMusic slot="icon" />
@@ -51,6 +73,7 @@ export const Route = createRootRoute({
 						Library
 					</mdui-navigation-rail-item>
 					<mdui-navigation-rail-item
+						value="downloads"
 						onClick={() => navigate({ to: "/downloads" })}
 					>
 						<Download slot="icon" />
