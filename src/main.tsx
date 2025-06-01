@@ -12,13 +12,13 @@ const router = createRouter({ routeTree });
 
 // Register the router instance for type safety
 declare module "@tanstack/solid-router" {
-	interface Register {
-		router: typeof router;
-	}
+  interface Register {
+    router: typeof router;
+  }
 }
 
 // Render the app
 const rootElement = document.getElementById("app");
 if (rootElement) {
-	render(() => <RouterProvider router={router} />, rootElement);
+  render(() => <RouterProvider router={router} />, rootElement);
 }
